@@ -14,7 +14,7 @@ In addition to lectures and presentations in class, there is also a lab, PF-3342
     * [Procedural Generation of Roads](https://www.researchgate.net/publication/229707505_Procedural_Generation_of_Roads)
     * [Addressing the Elephant in the Room: Opinionated Virtual Characters](http://www.exag.org/wp-content/uploads/2018/10/AIIDE-18_Upload_123.pdf)
     * [Desire Path-Inspired Procedural Placement of Coins in a Platformer Game](http://www.exag.org/wp-content/uploads/2018/10/AIIDE-18_Upload_117.pdf)
-    * [Poetic sound similarity vectors using phonetic features](
+    * [Poetic sound similarity vectors using phonetic features](https://aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/view/15879/15227)
     * [Social Simulation for Social Justice](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/viewFile/15917/15221)
     * [ProcDefense — A Game Framework for Procedural Player Skill Training](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/viewFile/15904/15232)
     * [POMCP with Human Preferences in Settlers of Catan](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE18/paper/viewFile/18091/17217)

@@ -31,9 +31,9 @@ permalink: /slides/lecture1.html
 
 class: center, middle
 
-# Creación de Videojuegos
+# AI in Digital Entertainment
 
-### III-Verano 2018
+### I Ciclo 2019
 
 ---
 # Instructor and Schedule
@@ -42,9 +42,9 @@ class: center, middle
  
  * Email: <a href="mailto:markus.eger.ucr@gmail.com">markus.eger.ucr@gmail.com</a>
  
- * Office hours: Monday, Wednesday, 2-2.55pm
+ * Office hours: Tuesday, Friday, 2-2.55pm
     
- * Class: Monday - Thursday, 3-5pm
+ * Class: Friday, 5-9pm
  
 ---
  
@@ -72,7 +72,13 @@ class: center, middle
  
  * Games: Smite, Guild Wars 2, Incremental Games 
  
- * I also like board games
+ * I also like board games (Dominion, Pandemic, Ricochet Robots, ...)
+
+---
+ 
+# About Me
+
+<img src="/PF-3341/assets/img/cats.jpg" width="100%"/>
  
 ---
  
@@ -88,168 +94,419 @@ class: center, middle
 
 # Class Resources
 
-  * Website: <a href="http://bit.ly/CI-2700">http://bit.ly/CI-2700</a>
+  * Website: <a href="http://bit.ly/PF-3341">http://bit.ly/PF-3341</a>
   
-  * Piazza: <a href="http://piazza.com/ucr.ac.cr/winter2019/ci2700">http://piazza.com/ucr.ac.cr/winter2019/ci2700</a>
-  
-  * Submission: TBD 
+  * Piazza: <a href="http://piazza.com/ucr.ac.cr/spring2019/pf3341">http://piazza.com/ucr.ac.cr/spring2019/pf3341</a>
   
 ---
   
 # Class contents
   
-  * Game Design
+  * Basic AI techniques
   
-    - Genres, mechanics, game worlds, narrative, etc.
-    - Goal: Learn to formulate game ideas in a structured way
+  * Planning, Search
   
-  * Game Development
+  * Beliefs, Desires, and Intentions
   
-    - Game Engines, Graphics, AI, Physics, Networking
-    - Goal: Learn how to actually build a game 
+  * Machine Learning: Neural Networks, Vector Models, Reinforcement Learning
   
-  * Game Publishing
+  * Procedural Content Generation
   
-    - User Experience, Testing, Monetization, Publishing 
-    - Goal: Learn how to finish a game
-    
 ---
-
-class: small
   
-# Class schedule
+# Class structure
   
-  * Game Design: 8/1-16/1
+  * Lectures introduce basic concepts
   
-  * Game Engines: 17/1-23/1
+  * We will also read and discuss papers about particular applications for the concepts 
   
-  * Graphics: 24/1-30/1
+  * Each student has to present one of these papers in class, and lead a discussion
   
-  * <b>Mid term exam: 7/2</b>
+  * You are all expected to read the papers *before class* to be able to discuss them in class
   
-  * AI: 4/2-12/2
-  
-  * Physics: 13/2-18/2
-  
-  * Networking: 19/2-20/2
-  
-  * Publishing: 21/2-27/2
-  
-  * <b>Final exam: 6/3</b>
+  * There will also be a project, in which you implement an AI technique of your choice
     
 ---
     
-# The Project 
+# Grading
   
-  * The main focus of this class is the *project*
+  * 30%: Paper presentation
   
-  * There will be *one* semester-long project 
+  * 20%: Quizzes about the paper contents and discussion participation
   
-  * In this project, you will design, implement and finish a game 
+  * 50%: Project, consisting of:
+      - 10%: Project proposal with background 
+      - 10%: Prototype/milestone submission
+      - 20%: Final submission
+      - 10%: Project presentation
   
-  * Work in groups of 4
+  * If you are signed up for the lab: Your project counts as the lab
+      
+---
+
+# Project
   
-  * Three milestones: Design document, protoype, finished game 
+For the project you can choose one of four (five) options:
+
+  - Implement an AI technique from a paper (published at CIG, AIIDE, or similar)
   
-  * Progress update *every Monday* (usually 5 minutes per group)
+  - Implement an agent for a (popular) game 
   
+  - Implement/improve an agent for a competition held at a conference
+  
+  - Implement procedural content generation modules
+  
+  - Make a suggestion
   
 ---
+
+# Project: Papers 
+
+  - Implement an AI technique from a paper 
   
-# Project Goal
+  - Published at a (game) AI conference or workshop, such as
+     * [Artificial Intelligence in Interactive Digital Entertainment (AIIDE)](http://aiide.org)
+     * [Computational Intelligence in Games (CIG)](http://www.ieee-cig.org/)
+     * [Foundations of Digital Games (FDG)](http://www.foundationsofdigitalgames.org/)
+     * [Experimental AI in Games (EXAG)](http://exag.org)
+     * [Procedural Content Generation Workshop (PCG)](https://www.pcgworkshop.com/)
+     
+  - You can also pick a paper and apply the technique it describes to another domain
+     
+  - I have some suggestions, but feel free to propose something else 
   
-  * You can make any game you want (more or less)
+---
+
+# Project: Papers 
+
+  * [Procedural Generation of Roads](https://www.researchgate.net/publication/229707505_Procedural_Generation_of_Roads): Use A* and a custom cost function to 
+  determine where to place roads to connect two points in a 3D landscape 
   
-  * Requirements
+  * [A semantic approach to patch-based procedural generationof urban road networks](https://www.researchgate.net/profile/Rafael_Bidarra/publication/319370642_A_semantic_approach_to_patch-based_procedural_generation_of_urban_road_networks/links/59c185fca6fdcc69b92bc55a/A-semantic-approach-to-patch-based-procedural-generation-of-urban-road-networks.pdf): Generate roads to build a city environment based on 
+  predefined parts ("patches")
   
-     - Single player play has to be possible
-     
-     - Three distinct zones/levels/maps/environments
-     
-     - Some form of computer-controlled characters with "interesting" behavior ("AI")
-     
-     - Unity strongly recommended, other options only with prior approval
-     
+  * [Desire Path-Inspired Procedural Placement of Coins in a Platformer Game](http://www.exag.org/wp-content/uploads/2018/10/AIIDE-18_Upload_117.pdf): Figure out
+  where to place coins in a platformer game depending on where players are more likely to go.
+  
+---
+
+# Project: Papers
+  
+  * [Poetic sound similarity vectors using phonetic features](https://aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/view/15879/15227): Convert words into vectors
+  representing how they sound in order to be able to compute similarity, e.g. for computational poetry
+  
+  * [Addressing the Elephant in the Room: Opinionated Virtual Characters](http://www.exag.org/wp-content/uploads/2018/10/AIIDE-18_Upload_123.pdf): Build a social
+  simulation in which virtual characters form and exchange opinions on topics.
+  
+  * [Social Simulation for Social Justice](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/viewFile/15917/15221): Build a social simulation with agents 
+  that discuss social issues, such as privilege and power dynamics
+  
+  * [Tarot-based narrative generation](https://dl.acm.org/citation.cfm?id=3235819): Use Tarot cards to generate stories.
+  
+---
+
+# Project: Papers
+  
+  * [ProcDefense — A Game Framework for Procedural Player Skill Training](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/viewFile/15904/15232): Build a 
+  small game with several parameters to tweak difficulty that can dynamically adapt to the player's performance.
+  
+  * [POMCP with Human Preferences in Settlers of Catan](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE18/paper/viewFile/18091/17217): Build AI agents for Hanabi
+  that use Partial Observable Monte Carlo Planning.
+  
+  * [Generating Levels That Teach Mechanics](https://arxiv.org/pdf/1807.06734.pdf): Generate levels for Super Mario that support the player in learning mechanics
+  
+  * [TaleSpin: An Interactive Program that Writes Stories](https://www.cs.utah.edu/nlp/papers/talespin-ijcai77.pdf): Build a system that uses character goals 
+  to tell fables.
+  
+---
+
+# Project: Papers
+
+These two papers are slightly different: You can use them as the basis for *your own* ideas.
+  
+  * [Glaive: A State-Space Narrative Planner Supporting Intentionality and Conflict](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE14/paper/viewFile/8991/8931): 
+  Generate stories using a planner.
+    
+  * [Exhaustive and Semi-Exhaustive Procedural Content Generation](https://www.cs.du.edu/~sturtevant/papers/sturtevant18epcg.pdf): Make something that makes
+  something (like levels, buildings, trees, ...)
 
 ---
+
+# Project: Competitions
+
+  * Some of the game AI conferences also host competitions (like [CIG](https://project.dke.maastrichtuniversity.nl/cig2018/competitions/)) using different games 
   
-# Project Schedule
+  * For the project you may choose to build or improve an AI agent according to the competition rules 
   
-  * Form groups: 14/1
+  * If the timing works out, I would also encourage you to submit them
   
-  * Design document: 20/1 
+  * It is completely OK to use a previous winner (if it is open source) as the basis and improve it 
   
-  * Prototype: 17/2
-  
-  * Final submission: 27/2
-  
-  * Project showcase: 28/2
+  * Just make sure to report your improvements and their effect on the agent's performance
   
 ---
-     
-# Unity 
 
-  * Unity is a game engine/middleware that simplifies many aspects of game development
+# Project: Competitions 
+
+  * [Hearthstone AI Competition](http://www.is.ovgu.de/Research/HearthstoneAI.html)
   
-  * Free for personal/educational use!
+  * [The Ms. Pac-Man Vs Ghost Team Competition](http://www.pacmanvghosts.co.uk/)
   
-  * Asset store with many free assets
+  * [StarCraft Competition](https://www.cs.mun.ca/~dchurchill/starcraftaicomp/)
   
-  * WebGL export capabilities
+  * [microRTS Competition](https://sites.google.com/site/micrortsaicompetition/home)
   
-  * Install as soon as possible!
+  * [Hanabi Competition](http://hanabi.fosslab.uk/description.html)
+  
+  * [Angry Birds Competition](https://aibirds.org/)
+
+---
+
+# Project: AI Agents 
+
+  - Another option for the project is to implement AI agents for a game of your choice 
+  
+  - I would suggest a game that has an open source implementation (e.g. [Quake 3](https://github.com/id-Software/Quake-III-Arena)), or that is not too difficult 
+  to implement (e.g. a board game)
+  
+  - The *project* consists of implementing the AI agents, so if there is no implementation and you spend weeks building a nice user interface that's on you 
+  
+  - To build the AI agents you should choose the appropriate techniques (we can discuss your options), and report how well they work
+
+---
+
+# Project: Procedural Content Generation
+
+  - Make something that makes something!
+  
+  - [Generominos](http://www.galaxykate.com/generominos/) can serve as guidelines/ideas 
+  
+  - Implement several different inputs, transformers and blocks 
+  
+  - Assemble into a pipeline 
+  
+  - If multiple students want to work on this: agree on a common API for the modules (but everyone creates their own modules), so you can mix and match
+  
+---
+
+# Project: Procedural Content Generation 
+
+<img src="/PF-3341/assets/img/gen1.jpg" width="45%"/><img src="/PF-3341/assets/img/gen2.jpg" width="45%"/>
   
 ---
   
 # Lectures
   
-  * The lectures work alongside the project
+  * 22/3: Behavior Trees, FSMs, etc.
+  * 29/3: Planning
+  * 5/4: Narrative
+  * 12/4: Intentionality
+  * 26/4: Belief Modeling
+  * 3/5: Game Trees and Uncertainty
+  * 10/5: Machine Learning
+  * 17/5: Neural Networks
+  * 24/5: Vector Models
+  * 31/5: Reinforcement Learning
+  * 7/6: Clustering
+  * 14/6: Grammars
+  * 21/6: ASP/CSP
+  * 28/6: Noise and Fractals
+  * 5/7: Project Presentations
   
-  * There are some lectures that teach concepts necessary for the project early on
-  
-  * Other lectures contain more advanced algorithms and methods
-  
-  * If the need arises, I can shuffle lectures around
-  
-  * There will be *two* exams, mid-term and final 
-  
-  * Questions about *your* project might be part of the exam
-
 ---
   
-# Support
+# Paper Presentations
   
-  * You will be learning Unity/C# as part of the project 
+  * 29/3: Behavior Trees, FSMs, etc.
   
-  * Many excellent tutorials online
+  * [Handling Complexity in the Halo 2 AI](https://www.gamasutra.com/view/feature/130663/gdc_2005_proceeding_handling_.php?page=1), by Damian Isla, presented at GDC 2005
   
-  * If you encounter problems: Ask on Piazza, maybe others have encountered similar problems
+  * Explains how Behavior Trees were used in Halo 2 to make editable, composable AI behaviors.
   
-  * Help each other! 
+  * Industry paper!
   
-  * Of course I will also be answering questions
+---
+
+# Paper Presentations 
+
+  * 5/4: Planning
+  
+  * [Three States and a Plan: The A.I. of F.E.A.R.](http://alumni.media.mit.edu/~jorkin/gdc2006_orkin_jeff_fear.pdf), by Jeff Orkin, presented at GDC 2006
+  
+  * The AI in F.E.A.R. uses a Finite State Machine with only 3 states, and relies on planning for more complex behaviors.
+  
+  * Also an industry paper!
+
+---
+
+# Paper Presentations 
+
+  * 12/4: Narrative
+  
+  * [Plans and Planning in Narrative Generation: A Review of Plan-Based Approaches to the Generation of Story, Discourse and Interactivity in Narratives](http://nil.cs.uno.edu/publications/papers/young2013plans.pdf), by R. Michael Young, Stephen Ware, Kara Cassell, and Justus Robertson, presented at CMN 2013
+  
+  * Computers can generate stories by using AI planning. The authors provide an overview over several different approaches, and describe the most important challenges.
+  
+  * Very good introduction, but a slightly longer paper
+  
+---
+
+# Paper Presentations 
+
+  * 26/4: Intentionality
+  
+  * [An Intentional AI for Hanabi](http://www.cig2017.com/wp-content/uploads/2017/08/paper_24.pdf), by Markus Eger, Chris Martens, and Marcela Alfaro Cordoba, presented at CIG 2017
+  
+  * AI agents can play games involving communication, such as Hanabi, well with human players by utilizing intentionality.
+  
+  * Part of my dissertation work
+  
+  
+---
+
+# Paper Presentations 
+
+  * 3/5: Belief Modeling
+  
+  * [Toward Characters Who Observe, Tell, Misremember, and Lie](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE15/paper/viewFile/11667/11394), by James Owen Ryan, Adam Summerville, Michael Mateas, and Noah Wardrip-Fruin, presented at EXAG 2015
+  
+  * Talk of the Town is a game in which knowledge gathering of non-player characters plays an important role. The paper describes how they simulate deception and 
+  forgetting in their virtual characters.
+  
+---
+
+# Paper Presentations 
+
+  * 10/5: Game Trees and Uncertainty
+  
+  * [Re-determinizing Information Set Monte Carlo Tree Search in Hanabi](https://arxiv.org/pdf/1902.06075.pdf), by James Goodman, arXiv preprint 2019
+  
+  * Monte Carlo Tree Search is often used for games with hidden information (such as shuffled cards), and there are several extensions. This paper presents one such improvement with an application to Hanabi.
+  
+  * Description of the winner of the Hanabi competition at CIG 2018
+  
+  
+---
+
+# Paper Presentations 
+
+  * 17/5: Machine Learning
+  
+  * [Build order optimization in Starcraft](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE11/paper/viewFile/4078/4407), by David Churchill and Michael Buro, presented at AIIDE 2011
+  
+  * Describes abstractions and heuristics that can be used to define and approach the build order optimization problem in StarCraft.  
+  
+---
+
+# Paper Presentations 
+
+  * 24/5: Neural Networks
+  
+  * [Super Mario as a String: Platformer Level Generation Via LSTMs](https://arxiv.org/pdf/1603.00930.pdf), by Adam Summerville and Michael Mateas, presented at DiGRA and FDG 2016
+
+or 
+
+  * [Mystical Tutor: A Magic: The Gathering Design Assistant via Denoising Sequence-to-Sequence Learning](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE16/paper/viewFile/13980/13599) by Adam Summerville and Michael Mateas, presented at AIIDE 2016
+  
+  * Both use Long-Short Term Memory Recurrent Neural Networks to generate content, one levels for Super Mario, the other Magic cards 
+  
+  
+---
+
+# Paper Presentations 
+
+  * 31/5: Vector Models
+  
+  * [dAIrector: Automatic Story Beat Generation through Knowledge Synthesis](http://ceur-ws.org/Vol-2321/paper8.pdf) by Markus Eger and Kory Mathewson, presented
+  at INT 2018
+  
+  * We describe a system that can be used as a director in an improv theater setting, generating prompts for the actors and giving them hints on how to proceed with a scene, based on the already presented prompts.
+  
+  * I'm probably biased, but I think this is a really need application of vector models.
+  
+  
+---
+
+# Paper Presentations 
+
+  * 7/6: Reinforcement Learning
+  
+  * [Improving Generalization Ability in a Puzzle Game Using Reinforcement Learning](http://www.cig2017.com/wp-content/uploads/2017/08/paper_71.pdf) by Hiroya 
+  Oonishi and Hitoshi Iima, presented CIG 2017
+  
+  * Shows work on a game called Geometry Friends, in which two different shapes have to collaborate to solve puzzles, and how reinforcement learning can be 
+  applied to the game to better solve unseen levels.
+  
+---
+
+# Paper Presentations 
+
+  * 14/6: Clustering
+ 
+  * [A Recommender System for Hero Line-Ups in MOBA Games](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/viewFile/15902/15164) by Lucas Hanke and Luiz Chaimowicz, presented AIIDE 2017
+  
+  * Shows work on a game called Geometry Friends, in which two different shapes have to collaborate to solve puzzles, and how reinforcement learning can be 
+  applied to the game to better solve unseen levels.
+  
+---
+
+# Paper Presentations 
+
+  * 21/6: Grammars
+  
+  * [Procedural Modeling of Interconnected Structures](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.682.2517&rep=rep1&type=pdf) by 
+  Lars Krecklau and Leif Kobbelt, presented at Computer Graphics Forum 2011
+  
+  * As we will see, Grammars can be used to generate 3D structures. In this paper, the authors describe a method to add connections to such structures, such
+  as supports for a rollercoaster that should be placed such that they don't intersect other parts of the geometry.
+ 
+  
+---
+
+# Paper Presentations 
+
+  * 28/6: ASP/CSP
+  
+  * [A Logical Approach to Building Dungeons: Answer Set Programming for Hierarchical Procedural Content Generation in Roguelike Games](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.682.2517&rep=rep1&type=pdf) by 
+  Anthony J. Smith and Joanna J. Bryson, presented at the 50th Anniversary Convention of the AISB, 2014
+  
+  * Describes how to generate dungeons using Answer Set Programming to ensure that the generated levels have the desired properties.
+  
+---
+
+# Paper Presentations 
+
+  * Pick your three (or more) favorite papers and send me an ordered list *by next Friday*
+  
+  * I will do my best to accommodate your preferences, but in case of a tie I will give preference to whoever sent their requests first 
+  
+  * However: Even if you send your email *right now* that does not mean you are guaranteed to get your top pick 
+  
+  * It helps if you know the games the papers are talking about, but is generally not necessary
+  
+  * If you have a paper you think is a better fit for some topic (or if you find one while preparing your presentation), please let me know 
+  
+---
+
+class: middle, center
+
+# What is AI?
+
+---
+
+class: middle, center
+
+# What are games?
+
   
 ---
   
 # To Dos
   
-  * Find a group for the project (Piazza)
+  * Come up with project suggestions 
   
-  * Give your group a name (can be funny, a pun, a reference)
+  * Decide which paper you want to present, and send me an email with your top three choices
   
-  * Work on 3-5 game ideas
-  
-  * Present your group, name, and game ideas next Monday, January 14
-  
-  * Each group has 10 minutes!
-  
----
-  
-# References
-  
-  * Unity: <a href="http://unity3d.com">http://unity3d.com</a>
-  
-  * Piazza: <a href="http://piazza.com/ucr.ac.cr/winter2019/ci0152">http://piazza.com/ucr.ac.cr/winter2019/ci0152</a>
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
