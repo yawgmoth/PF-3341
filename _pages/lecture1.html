@@ -78,7 +78,21 @@ class: center, middle
  
 # About Me
 
-<img src="/PF-3341/assets/img/cats.jpg" width="100%"/>
+<img src="/PF-3341/assets/img/cats.jpg" width="60%"/>
+
+---
+ 
+# About My Research
+
+  - For my dissertation ("Intentional Agents for Doxastic Games") I worked on games involving communication 
+  
+  - Hanabi: Cooperative card game with restricted communication 
+  
+  - One Night Ultimate Werewolf: Unrestricted communication, featuring lies and deception 
+  
+  - I also worked on narrative generation for a bit, particularly detective stories 
+  
+  - The basis for my work were Dynamic Epistemic Logic, Planning, and Intentionality
  
 ---
  
@@ -422,7 +436,7 @@ or
   
   * We describe a system that can be used as a director in an improv theater setting, generating prompts for the actors and giving them hints on how to proceed with a scene, based on the already presented prompts.
   
-  * I'm probably biased, but I think this is a really need application of vector models.
+  * I'm probably biased, but I think this is a really neat application of vector models.
   
   
 ---
@@ -445,8 +459,7 @@ or
  
   * [A Recommender System for Hero Line-Ups in MOBA Games](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/viewFile/15902/15164) by Lucas Hanke and Luiz Chaimowicz, presented AIIDE 2017
   
-  * Shows work on a game called Geometry Friends, in which two different shapes have to collaborate to solve puzzles, and how reinforcement learning can be 
-  applied to the game to better solve unseen levels.
+  * Presents a system that suggests which heroes players should pick in DOTA2 to increase their chances of winning, based on which heroes have already been picked.
   
 ---
 
@@ -494,10 +507,236 @@ class: middle, center
 
 ---
 
+# What is AI?
+
+  * If you ask 20 AI researchers what AI is, you will get 25 different definitions 
+  
+  * Some include Machine Learning, some say ML and AI are distinct things 
+  
+  * Commonly, "the science of intelligent agents"
+  
+  * Behavior that can be applied in unknown situations 
+  
+  * Or, as Douglas R. Hofstadter said "AI is whatever hasn't been done yet"
+
+---
+
 class: middle, center
 
 # What are games?
 
+---
+
+# What are games?
+
+  * Just as with AI, there is no agreed upon definition of "game"
+  
+  * Commonly: There are goals and rules 
+  
+  * Bernard Suits (Philosopher): "Playing a game is the voluntary effort to overcome unnecessary obstacles"
+  
+  * But there are certainly games that don't have goals?
+  
+---
+
+class: center, middle
+
+<img src="/CI-2700/assets/img/minecraft.jpg" width="95%"/>
+
+(Minecraft)
+
+---
+
+# What about this one?
+
+<img src="/CI-2700/assets/img/bandersnatch.jpg" width="90%"/>
+
+(Bandersnatch)
+
+---
+
+# Digital Entertainment 
+
+  * The reason this class is not called "game AI" is because I want to make it clear that we're also talking about things that may or may not be games (depending
+  on your definition)
+  
+  * Another example would be computer-generated stories, or improv theater 
+  
+  * "Games", classical or experimental, are an important part of Digital Entertainment, though
+  
+---
+
+class: center, middle 
+
+# Some Basics 
+
+---
+
+# Game AI 
+
+  - In a (classical) game, AI can be used for many different purposes 
+  
+  - NPC behaviors are usually AI driven (with various complexity)
+  
+  - You can generate content (names, trees, buildings, stories, mechanics, entire games, ...) using AI 
+  
+  - If you want to know what your players are doing you can use AI techniques for player analytics 
+  
+  - We will mostly cover NPC behavior and procedural content generation in this class 
+  
+---
+
+# NPC Behavior
+
+  - The first rule of game AI in industry: It does not matter how smart/dumb your NPCs are, as long as the game plays well 
+  
+  - We will discuss academic approaches to AI that may have their own goals
+  
+  - There are really two criteria to optimize for: 
+  
+       * Human perception
+       * Win rate
+  
+  - These two may not always align (imagine bots in a shooter that have perfect aim)
+  
+---
+
+class: center, middle
+
+# An example 
+
+## Let's talk about the oldest survival game in which you have to escape from the Undead 
+
+--
+
+## Pacman!
+
+---
+
+# Pacman 
+
+<img src="/CI-2700/assets/img/pacman.png" width="50%"/>
+
+---
+
+# Pacman Ghost AI 
+
+  * There are four ghosts: Blinky, Pinky, Inky, and Clyde
+
+  * They chase Pacman 
+  
+  * But they all have different "personalities"
+  
+  * How?
+  
+  * What are they actually doing?
+  
+---
+
+class: small
+
+# Example: Pacman Ghost AI 
+
+Some disclaimers:
+
+  * The ghosts actually have three modes: scatter, chase and frightened 
+  
+  * In scatter mode each of them tries to get to his own corner 
+  
+  * In frightened mode, they move randomly and can be eaten 
+  
+  * Scatter and chase modes alternate temporally; frightened mode is triggered by eating a power-up
+  
+  * We will only be talking about chase mode 
+  
+---
+
+# Example: Pacman Ghost AI: The maze 
+
+<img src="/CI-2700/assets/img/pacmanmaze.png" width="50%"/>
+
+---
+
+# Example: Pacman Ghost AI
+
+  * Each ghost has a current position/cell and a target position/cell 
+  
+  * Ghosts can not turn around
+  
+  * Whenever a ghost comes to an intersection, it has to decide where to go 
+  
+  * This decision is based on what their target is 
+  
+---
+
+# Example: Pacman Ghost AI
+
+  * Only Blinky is actually "chasing" Pacman
+
+  * Pinky is trying to get to where Pacman "will be"
+
+  * Inky does something weird, his target depends on Pacman's position *and* Blinky's position
+  
+  * Clyde tries to chase Pacman if he is far away, but if he gets too close he will try to go back to his own corner
+
+---
+
+# Example: Pacman Ghost AI: Pathfinding
+
+  * How do the ghosts calculate the path to their target cell?
+  
+  * They don't!
+  
+  * Instead, before an intersection, they look at the next cell in each direction, and pick the direction that is closest to the target
+  
+<img src="/CI-2700/assets/img/ghostdecision.png" width="80%"/>
+
+---
+
+# Example: Pacman Ghost AI
+
+What is the problem with this approach?
+
+--
+
+<img src="/CI-2700/assets/img/cantreach.png" width="80%"/>
+
+---
+
+class: small
+
+# Procedural Content Generation
+
+  * Making games requires a lot of effort 
+  
+  * Apart from coding, there are also art assets, music, a story, etc. that need to be created 
+  
+  * Some of these creation processes can be (partially) automated, or assisted: Procedural Content Generation (PCG)
+  
+  * Two problems
+  
+     - Generating content is not always easy
+     - Generating *good* content is usually even harder
+     
+---
+
+# Procedural Content Generation
+
+  * Procedural Content Generation is widely used in the industry
+  
+  * For example: Diablo 3 generates dungeons, weapons, even names for the enemies
+  
+  * Usually this is done by combining predefined patterns in a structured way
+  
+  * We will also discuss more experimental ways to generate content
+  
+---
+
+# Overenthusiastic generation
+
+<img src="/CI-2700/assets/img/keyforge.png" width="100%"/>
+
+(Keyforge)
   
 ---
   
