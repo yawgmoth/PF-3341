@@ -853,11 +853,13 @@ In fact, that's how our interpretations work.
 # Predicate Logic: Interpretations 
 
   * Technically, an interpretation has to assign values to all our constants, since Socrates and Plato could be the same person in an interpretation! We 
-  will typically use the unique-names assumption to avoid such problems.
+  will typically use the *unique-names assumption* to avoid such problems.
   
-  * Then, the interpretation has to contain definitions for every predicate, in the form of a set.
+  * Then, the interpretation has to contain definitions for every predicate, in the form of a set of tuples.
   
-  * The *closed world assumption* 
+  * The *closed world assumption* states that everything we don't know to be true (i.e. everything not in the set representing a predicate) is in fact false.
+  
+  * Using these assumptions, we can represent our interpretation as a collection of sets, one for each predicate. 
   
 ---
 
