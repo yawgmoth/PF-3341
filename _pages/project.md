@@ -38,4 +38,4 @@ Students are also free to propose their own ideas, as long as they are related t
 
   * A project proposal (2-4 pages), with a summary of the necessary background information, the problem the student is proposing to work on and the evaluation criteria. Due 31/3.
   * A prototype/milestone submission, demonstrating the feasibility of the project, and a short description of which parts already work/are still missing. Due 3/6.
-  * The final delivery, consisting of all code necessary to run the project, as well as a 6-10 page report that contains the technical contribution of the student as well as an illustration of the result, compared against the evaluation criteria described in the proposal. Due 4/7.
+  * The final delivery, consisting of all code necessary to run the project, as well as a 2-6 page report that contains the technical contribution of the student as well as an illustration of the result, compared against the evaluation criteria described in the proposal. Due 4/7.
