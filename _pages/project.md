@@ -36,5 +36,6 @@ In addition to lectures and presentations in class, there is also a lab, PF-3342
   
 Students are also free to propose their own ideas, as long as they are related to AI in digital entertainment. The project consists of two main deliverables:
 
-  * A project proposal (2-4 pages), with a summary of the necessary background information, the problem the student is proposing to work on and an evaluation criterion.
-  * The final delivery, consisting of all code necessary to run the project, as well as a 6-10 page report that contains the technical contribution of the student as well as an illustration of the result, compared against the evaluation criterion described in the proposal.
+  * A project proposal (2-4 pages), with a summary of the necessary background information, the problem the student is proposing to work on and the evaluation criteria. Due 31/3.
+  * A prototype/milestone submission, demonstrating the feasibility of the project, and a short description of which parts already work/are still missing. Due 3/6.
+  * The final delivery, consisting of all code necessary to run the project, as well as a 6-10 page report that contains the technical contribution of the student as well as an illustration of the result, compared against the evaluation criteria described in the proposal. Due 4/7.

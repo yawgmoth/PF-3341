@@ -100,6 +100,8 @@ class: center, middle
 
  * Name
  
+ * What do you work on?
+ 
  * Games
  
  * Fun facts?
@@ -127,6 +129,19 @@ class: center, middle
   * Procedural Content Generation
   
 ---
+
+# Textbook
+
+  * I will (loosely) follow *Artificial Intelligence and Games* by Georgios N. Yannakakis and Julian Togelius
+  
+  * There is a free PDF available on the [website](http://gameaibook.org/)
+  
+  * Another helpful reference for some parts is the *Procedural Content Generation* textbook by Noor Shaker, Julian Togelius, and Mark J. Nelson (also available 
+  as a free PDF from the [website](http://pcgbook.com/))
+  
+  * Not free, but highly recommended is also *[Artificial Intelligence: A Modern Approach](http://aima.cs.berkeley.edu/)* by Stuart Russell and Peter Norvig
+  
+---
   
 # Class structure
   
@@ -149,10 +164,10 @@ class: center, middle
   * 20%: Quizzes about the paper contents and discussion participation
   
   * 50%: Project, consisting of:
-      - 10%: Project proposal with background 
-      - 10%: Prototype/milestone submission
-      - 20%: Final submission
-      - 10%: Project presentation
+      - 10%: Project proposal with background, due 31/3 AoE.
+      - 10%: Prototype/milestone submission, due 3/6 AoE.
+      - 20%: Final submission, due 4/7 AoE.
+      - 10%: Project presentation, 5/7 in class.
   
   * If you are signed up for the lab: Your project counts as the lab
       
@@ -215,7 +230,8 @@ For the project you can choose one of four (five) options:
   * [Social Simulation for Social Justice](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/viewFile/15917/15221): Build a social simulation with agents 
   that discuss social issues, such as privilege and power dynamics
   
-  * [Tarot-based narrative generation](https://dl.acm.org/citation.cfm?id=3235819): Use Tarot cards to generate stories.
+  * [POMCP with Human Preferences in Settlers of Catan](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE18/paper/viewFile/18091/17217): Build AI agents for Hanabi
+  that use Partially Observable Monte Carlo Planning.
   
 ---
 
@@ -223,11 +239,10 @@ For the project you can choose one of four (five) options:
   
   * [ProcDefense — A Game Framework for Procedural Player Skill Training](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE17/paper/viewFile/15904/15232): Build a 
   small game with several parameters to tweak difficulty that can dynamically adapt to the player's performance.
-  
-  * [POMCP with Human Preferences in Settlers of Catan](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE18/paper/viewFile/18091/17217): Build AI agents for Hanabi
-  that use Partial Observable Monte Carlo Planning.
-  
+
   * [Generating Levels That Teach Mechanics](https://arxiv.org/pdf/1807.06734.pdf): Generate levels for Super Mario that support the player in learning mechanics
+  
+  * [Tarot-based narrative generation](https://dl.acm.org/citation.cfm?id=3235819): Use Tarot cards to generate stories.
   
   * [TaleSpin: An Interactive Program that Writes Stories](https://www.cs.utah.edu/nlp/papers/talespin-ijcai77.pdf): Build a system that uses character goals 
   to tell fables.
@@ -256,7 +271,7 @@ These two papers are slightly different: You can use them as the basis for *your
   
   * It is completely OK to use a previous winner (if it is open source) as the basis and improve it 
   
-  * Just make sure to report your improvements and their effect on the agent's performance
+  * Make sure to report your improvements and their effect on the agent's performance!
   
 ---
 
@@ -273,6 +288,8 @@ These two papers are slightly different: You can use them as the basis for *your
   * [Hanabi Competition](http://hanabi.fosslab.uk/description.html)
   
   * [Angry Birds Competition](https://aibirds.org/)
+  
+  * [Unity Obstacle Tower Challenge](https://www.aicrowd.com/challenges/unity-obstacle-tower-challenge)
 
 ---
 
@@ -368,7 +385,7 @@ These two papers are slightly different: You can use them as the basis for *your
 
   * 26/4: Intentionality
   
-  * [An Intentional AI for Hanabi](http://www.cig2017.com/wp-content/uploads/2017/08/paper_24.pdf), by Markus Eger, Chris Martens, and Marcela Alfaro Cordoba, presented at CIG 2017
+  * [An Intentional AI for Hanabi](http://www.cig2017.com/wp-content/uploads/2017/08/paper_24.pdf), by Markus Eger, Chris Martens, and Marcela Alfaro C&oacute;rdoba, presented at CIG 2017
   
   * AI agents can play games involving communication, such as Hanabi, well with human players by utilizing intentionality.
   
@@ -517,6 +534,8 @@ class: middle, center
   * Behavior that can be applied in unknown situations 
   
   * Or, as Douglas R. Hofstadter said "AI is whatever hasn't been done yet"
+  
+  * "Everything in AI is either representation or search"
 
 ---
 
@@ -582,21 +601,6 @@ class: center, middle
   - If you want to know what your players are doing you can use AI techniques for player analytics 
   
   - We will mostly cover NPC behavior and procedural content generation in this class 
-  
----
-
-# NPC Behavior
-
-  - The first rule of game AI in industry: It does not matter how smart/dumb your NPCs are, as long as the game plays well 
-  
-  - We will discuss academic approaches to AI that may have their own goals
-  
-  - There are really two criteria to optimize for: 
-  
-       * Human perception
-       * Win rate
-  
-  - These two may not always align (imagine bots in a shooter that have perfect aim)
   
 ---
 
@@ -702,7 +706,28 @@ What is the problem with this approach?
 
 ---
 
-class: small
+# NPC Behavior
+
+  - The first rule of game AI (in the industry): It does not matter how smart/dumb your NPCs are, as long as the game plays well 
+  
+  - We will discuss academic approaches to AI that may have their own goals
+  
+  - There are really two very different criteria to optimize for: 
+  
+       * Human perception
+       * Win rate
+  
+  - These two may not always align (imagine bots in a shooter that have perfect aim)
+
+---
+
+class: middle, center
+
+# Procedural Content Generation
+
+---
+
+class: medium
 
 # Procedural Content Generation
 
@@ -738,19 +763,222 @@ class: small
 (Keyforge)
   
 ---
+
+class: center, middle
+
+# Logic
+
+---
+
+# Why Logic?
+
+  * As mentioned earlier, everything in AI is either representation or search 
+  
+  * Logical formulas are often a very convenient representation 
+  
+  * Why convenient?
+     
+      - Can be generated automatically
+      - Can be processed automatically 
+      - Are very expressive
+
+  * We will use logic extensively!
+  
+---
+
+# Propositional Logic 
+
+  * I'm assuming you are all familiar with propositional logic?
+  
+  * `\(a \wedge b\)`, `\(a \vee b\)`, `\(\neg a\)`
+  
+  * If we have some interpretation S of a and b, we can determine truth values
+  
+  * `\( S \models  a \wedge b \)` iff a and b are both true in S 
+  
+  * So what is S?
+  
+---
+
+# Interpretations
+
+  * S is an *interpretation*, which assigns truth values to every constant
+
+  * Sometimes it is convenient to represent S as a set that contains everything that is true 
+  
+  * Conversely, everything that is not in the set is false
+  
+  * You may have heard the term *model*: An interpretation under which a formula is satisfied 
+  
+  * A formula is a tautology if *all* interpretations are models
+
+---
+
+# Predicate Logic 
+
+  * Representing any non-trivial state in propositional logic is tedious (imagine chess: there has to be one variable for each possible location of each piece)
+  
+  * We will use Predicate Logic instead, which represents the world as objects and relations between them 
+  
+  * Objects: constants
+  
+  * Relations: Sets of n-tuples of objects, called predicates (n is the *arity* of the predicate)
+  
+  * (Functors: Assignments of n-tuples of objects to objects)
+  
+  * We also have sets of objects, and quantifiers `\( \forall, \exists \)`
+  
+---
+
+# Predicate Logic: Example
+
+$$
+\mathit{human}(\mathit{socrates})\\\\
+\forall h: \mathit{human}(h) \rightarrow \mathit{mortal}(h)\\\\
+\mathit{friends}(\mathit{socrates}, \mathit{plato})
+$$
+--
+`\(\mathit{human}(h)\)` is an unary relation, i.e. a set of 1-tuples/single elements. It is often more convenient to write:
+
+$$
+\forall h \in \mathit{human}(h): \mathit{mortal}(h)
+$$
+--
+Using set-operators, we could also write `\((\mathit{socrates}, \mathit{plato}) \in \mathit{friends}\)`
+
+In fact, that's how our interpretations work.
+
+---
+
+# Predicate Logic: Interpretations 
+
+  * Technically, an interpretation has to assign values to all our constants, since Socrates and Plato could be the same person in an interpretation! We 
+  will typically use the unique-names assumption to avoid such problems.
+  
+  * Then, the interpretation has to contain definitions for every predicate, in the form of a set.
+  
+  * The *closed world assumption* 
+  
+---
+
+# Actions? 
+
+  * We often want to represent a world that is changing, rather than just static facts 
+  
+  * Simple solution: Let's use constants representing (discrete) times, and increase the arity of each predicate by one to account for time 
+  
+  * For example, `\(\mathit{human}(\mathit{socrates})\)` becomes `\(\mathit{human}(\mathit{socrates}, 0)\)`, or 
+  `\(\forall t \in \mathit{Times}: \mathit{human}(\mathit{socrates}, t)\)`
+  
+  * An *action* is something that changes some truth values over time, often represented as an implication, like `\(\mathit{alive}(\mathit{socrates}, 400 \text{BCE}) \rightarrow \neg \mathit{alive}(\mathit{socrates}, 399 \text{BCE})\)`
+  
+  * This can be generalized with quantifiers and special predicates that indicate when actions occur, if needed
+
+---
+
+# The Yale Shooting Problem 
+
+   * Consider Fred, a turkey, and a gun 
+   
+   * At time 0, Fred is alive and the gun is unloaded
+   
+   * We load the gun, so that at time 1 the gun is loaded 
+   
+   * Then we wait 
+   
+   * At time 2 we shoot, such that at time 3 Fred is dead 
+   
+---
+
+# The Yale Shooting Problem 
+
+$$
+\mathit{alive}(\mathit{Fred}, 0)\\\\
+\neg \mathit{loaded}(\mathit{Gun}, 0)\\\\
+\neg \mathit{loaded}(\mathit{Gun}, 0) \rightarrow \mathit{loaded}(\mathit{Gun}, 1)\\\\
+\mathit{loaded}(\mathit{Gun}, 2) \rightarrow \neg \mathit{alive}(\mathit{Fred}, 3)
+$$
+
+--
+
+What about `\(\mathit{alive}(\mathit{Fred}, 1)\)`?
+
+What about `\(\mathit{loaded}(\mathit{Gun}, 2)\)`?
+
+Idea: Let's say "the least" number of things change each time step!
+
+--
+
+The turkey could still die at time step 1 and stay dead ...
+
+---
+
+# The Frame Problem 
+
+  - The Yale Shooting Problem is an illustration of the Frame Problem: Everything that is not changed by an action (the "frame") should stay the same 
+  
+  - But how would we even write this in logical formulas?
+  
+  - There are several solutions!
+  
+  - One approach: Frame axioms. For each action state what the action leaves unchanged. This may require a lot of extra formulas.
+  
+  - Another approach: Distinguish states and actions, and represent changes as a transition system 
+  
+---
+
+# Transition System Approach 
+
+  - We start with a state `\(s_0 = \{\mathit{alive}(\mathit{Fred}), \neg \mathit{loaded}(\mathit{Gun}) \}\)`, which we can use for logical queries such as
+  `\(s_0 \models \mathit{alive}(\mathit{Fred}) \)`
+  
+  - We have an action `load(Gun)` which turns a state into another state:
+  
+     - If the Gun is not loaded, it becomes loaded 
+     - If the Gun is already loaded, nothing happens 
+     
+  - `\(s_1 = \{\mathit{alive}(\mathit{Fred}), \mathit{loaded}(\mathit{Gun}) \}\)`
+  
+  - Now we can query `\(s_2 \models \mathit{alive}(\mathit{Fred})\)`
+  
+---
+
+# Transition System Approach
+
+  - This approach forms the basis for many of the techniques we are going to discuss, especially the planning-based ones 
+  
+  - However, it also has drawbacks: If our states only represent individual time steps, we can't (easily) query things like "how long was Fred alive"
+  
+  - [Logic and AI](https://plato.stanford.edu/entries/logic-ai/)
+  
+  - [The Frame Problem](https://plato.stanford.edu/entries/frame-problem/) 
+  
+---
   
 # To Dos
   
-  * Come up with project suggestions 
+  * Come up with project suggestions, deadline for the proposal: 31/3 AoE. I encourage you to discuss your ideas with me beforehand.
   
-  * Decide which paper you want to present, and send me an email with your top three choices
+  * Decide which paper you want to present, and send me an email with your top three (or more) choices by *next Friday 22/3*.
+  
+  * Sign up for Piazza: <a href="http://piazza.com/ucr.ac.cr/spring2019/pf3341">http://piazza.com/ucr.ac.cr/spring2019/pf3341</a>
   
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({"highlightStyle": "dark"});
+      
+      // Setup MathJax
+      MathJax.Hub.Config({
+          tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+
+      MathJax.Hub.Configured();
     </script>
   </body>
 </html>
