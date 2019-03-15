@@ -870,7 +870,7 @@ In fact, that's how our interpretations work.
   * Simple solution: Let's use constants representing (discrete) times, and increase the arity of each predicate by one to account for time 
   
   * For example, `\(\mathit{human}(\mathit{socrates})\)` becomes `\(\mathit{human}(\mathit{socrates}, 0)\)`, or 
-  `\(\forall t \in \mathit{Times}: \mathit{human}(\mathit{socrates}, t)\)`
+  `\(\forall t \in T: \mathit{human}(\mathit{socrates}, t)\)`
   
   * An *action* is something that changes some truth values over time, often represented as an implication, like `\(\mathit{alive}(\mathit{socrates}, 400 \text{BCE}) \rightarrow \neg \mathit{alive}(\mathit{socrates}, 399 \text{BCE})\)`
   
