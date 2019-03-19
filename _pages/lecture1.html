@@ -841,7 +841,7 @@ $$
 `\(\mathit{human}(h)\)` is an unary relation, i.e. a set of 1-tuples/single elements. It is often more convenient to write:
 
 $$
-\forall h \in \mathit{human}(h): \mathit{mortal}(h)
+\forall h \in \mathit{human}: \mathit{mortal}(h)
 $$
 --
 Using set-operators, we could also write `\((\mathit{socrates}, \mathit{plato}) \in \mathit{friends}\)`
@@ -941,7 +941,7 @@ The turkey could still die at time step 1 and stay dead ...
      
   - `\(s_1 = \{\mathit{alive}(\mathit{Fred}), \mathit{loaded}(\mathit{Gun}) \}\)`
   
-  - Now we can query `\(s_2 \models \mathit{alive}(\mathit{Fred})\)`
+  - Now we can query `\(s_1 \models \mathit{alive}(\mathit{Fred})\)`
   
 ---
 
