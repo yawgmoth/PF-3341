@@ -771,6 +771,104 @@ class: center, middle
 
 ---
 
+# Utility 
+
+  * Sometimes we can just assign a numerical value ("score") to the observations, and then combine these scores in some way to get a decision
+  
+  * For example, we can assign a score to the distance from the player, the agent's health, maybe their remaining mana, etc. 
+  
+  * Then, we can calculate a score for a melee attack by *weighing* the distance as more significant than the health, and mana being irrelevant 
+  
+  * On the other hand, the score for a fireball would be more affected by the remaining mana and less by the distance (up to a threshold, perhaps)
+  
+  * The agent then simply picks the action with the highest score/utility
+  
+---
+
+# Utility: Our ARPG enemy
+
+Three options: melee, fireball or run away
+
+$$
+u_m = 0.8 \cdot d + 0.2 \cdot h + 0 \cdot m \\\\
+u_f = 0.4 \cdot d + 0.2 \cdot h + 0.4 \cdot m \\\\
+u_r = 0.4 \cdot d + 0.6 \cdot h + 0 \cdot m
+$$
+
+We are 80 units away from the player, have 90% health and 100% mana. What do we do?
+
+--
+
+At which distance would we attack the player?
+
+--
+
+We need to define the scores! Let's say 
+
+$$
+d = \frac{80}{\mathit{distance} + 80}, h = \frac{\mathit{health}}{100}, m = \frac{\mathit{mana}}{100}
+$$
+  
+---
+
+class: small
+
+# Utility: Advantages and Limitations
+
+  * The main advantage of this utility-based approach is that it is easy to extend
+  
+  * If a new action becomes available: assign a scoring function to it, and the agent will automatically consider it
+  
+  * If a new kind of observation becomes available: add it to the scoring functions where it is relevant
+  
+  * Drawback: The scaling of the utility scores needs to be consistent (often easiest achieved by normalizing them to be between 0 and 1)
+  
+  * Another drawback: Determining the formulas for each action/option is non-trivial, especially when they have many terms
+  
+---
+
+class: small
+
+# Utility: Task Assignment
+
+  * Say we have StarCraft, a real-time strategy game 
+  
+  * The AI agent controls a number of squads of different units 
+  
+  * There are several possible targets for each squad to attack 
+  
+  * Let's assign a utility value for each combination of squad and target!
+  
+  * Utility values can be zero (e.g. the squad and the target both die), or maybe even negative (trying to attack airborne Wraiths with ground-only Zerglings)
+  
+  * We want all targets to be attacked
+  
+---
+
+# Utility: Task Assignment
+
+  * To assign squads to targets, we calculate the utility of a particular assignment as the sum of all individual utilities 
+  
+  * For example, if squad 1 attacking target 1 has utility 0.4, and squad 2 attacking target 2 has utility 0.1, the total utility is 0.5
+  
+  * We calculate these utilities for *all* possible assignments 
+  
+  * Then we pick the assignment with the highest total utility
+  
+---
+
+# Another Task Assignment Example
+
+  * Instead of squads of units we have students 
+  
+  * Instead of targets to attack we have papers to present 
+  
+  * And y'all sent me the utility values ...
+  
+  * Papers were assigned to maximize total utility
+
+---
+
 class: center, middle 
 
 # Game Trees
@@ -2939,6 +3037,8 @@ class: small
   * [Sliding puzzle using A*](https://blog.goodaudience.com/solving-8-puzzle-using-a-algorithm-7b509c331288)
   
   * [Building a Chess AI with Minimax](https://medium.freecodecamp.org/simple-chess-ai-step-by-step-1d55a9266977)
+  
+  * [Potential Fields for RTS Games](http://bth.diva-portal.org/smash/get/diva2:835046/FULLTEXT01.pdf)
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
