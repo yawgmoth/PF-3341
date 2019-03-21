@@ -23,6 +23,8 @@
       .red { color: #fa0000; }
       .large { font-size: 2em; }
       
+      .medium li {  font-size: 1.15em; }
+      
       .small li {  font-size: 1em; }
       
       .tiny table {  font-size: 0.8em; }
@@ -61,6 +63,8 @@ class: center, middle
      
 ---
 
+class: medium
+
 # PEAS
   
   * **P**erformance: How do we measure the quality of the agent (e.g. score, player enjoyments)
@@ -69,19 +73,23 @@ class: center, middle
   
   * **A**ctuators: Which actions can the agent perform (e.g. move, shoot a fireball, ...)
   
-  * **S**ensors: How does the agent perceive the world (we typically give it access to some data structures representing the game, but 
-
+  * **S**ensors: How does the agent perceive the world (in games wee typically give it access to some data structures representing the game, but some researchers work on playing games using screen captures) 
+  
 ---
 
-# A first agent: An enemy in an ARPG 
+class: small
 
-  * Performance: How much damage it can do to the player? 
+# Agents in Games 
+
+  * Say you have some NPC character in your game that should be controlled by AI
   
-  * Environment: A dungeon in the game 
+  * Your game typically contains some main loop that updates all game objects and renders them 
   
-  * Actuators: Rotate, move forward, hit
+  * At some points you run an AI update
   
-  * Sensors: Player position
+  * This means, all our agents receive one "update" call every x ms, and this update call has to make the necessary decisions
+  
+  * Simplest approach: On each update, the agent reads the sensor values calculates the which actuators to use based on these values
   
 ---
 
@@ -101,11 +109,23 @@ class: center, middle
 
 # Braitenberg Vehicles 
 
-<img src="braitenberg.png" width="70%"/>
+<img src="/PF-3341/assets/img/braitenberg.png" width="70%"/>
 
 ---
 
-# Back to our ARPG agent
+# A first agent: An enemy in an ARPG 
+
+  * Performance: How much damage it can do to the player? 
+  
+  * Environment: A dungeon in the game 
+  
+  * Actuators: Rotate, move forward, hit
+  
+  * Sensors: Player position (With that we can compute distance and angle to the player)
+
+---
+
+# Behavior for our ARPG agent
 
   * If the angle to the player is greater than 0, turn left 
   
@@ -127,6 +147,8 @@ class: center, middle
   
   * How did we even come up with these conditions?
   
+  * How could we make this a bit friendlier to edit?
+  
 ---
 
 # Decision Trees
@@ -144,6 +166,12 @@ class: center, middle
   * There's also no persistence, the agent will decide a new behavior every time the tree is evaluated
   
   * There is one nice thing: Decision trees can (sometimes) be learned with Machine Learning techniques
+  
+---
+
+class: center, middle 
+
+# Finite State Machines
   
 ---
 
@@ -173,7 +201,7 @@ class: center, middle
 
 # Finite State Machines 
 
-<img src="fsm.png" width="100%"/>
+<img src="/PF-3341/assets/img/fsm.png" width="100%"/>
 
 ---
 
@@ -286,7 +314,9 @@ class: center, middle
 
 # Behavior Trees
 
-  * Behavior Trees are a very powerful technique and widely used in games (we'll see one example in the presentation next week)
+  * Behavior Trees are a very powerful technique and widely used in games
+  
+  * Halo 2, for example, used them 
   
   * Unreal Engine has built-in support for Behavior Trees (there are plugins for Unity)
   
@@ -296,7 +326,7 @@ class: center, middle
 
 # Behavior Trees in Unreal Engine 
 
-<img src="bteditor.jpg" width="70%"/>
+<img src="/PF-3341/assets/img/bteditor.jpg" width="70%"/>
 
 ---
 
@@ -342,14 +372,35 @@ destination by being connected with edges. The cost is the sum of the costs of e
 # How could we find a path?
 
 <img src="/CI-2700/assets/img/pathproblem.png" width="100%"/>
+
+---
+
+class: medium
+
+# Uninformed Search
+
+  - The simplest pathfinding algorithm works like this:
+  
+      - Keep track of which nodes are candidates for expansion (starting with the start node)
+      - Take one of these nodes and expand it 
+      - If you reach the target, you have found a path
+      
+  - How do you "keep track" of nodes?
+  
+      - Use a list/queue: You now have "breadth-first search"
+      - Use a stack: You now have "depth-first search"
+      
+---
+
+# Uninformed Search
+
+<img src="/PF-3341/assets/img/bfsdfs.png" width="100%"/>
   
 ---
 
 class: small
 
 # Heuristic Search
-
-  * All of these techniques are called "uninformed"
   
   * What if we can give the path finding algorithm some more information?
   
@@ -363,13 +414,15 @@ class: small
 
 # Heuristic Search: General algorithm
 
-  * Keep a "frontier" as a list, initialized with the start node 
+  * We use the same algorithm as above:
   
-  * If the goal is in the frontier, we are done
+      - Keep track of which nodes are candidates for expansion (starting with the start node)
+      - Take one of these nodes and expand it 
+      - If you reach the target, you have found a path
   
-  * Expand "the best" node from the frontier by adding all of its neighbors that have not been visited yet to the frontier 
-  
-What's "the best" node?
+  * Instead of using a stack or list, we use a *priority queue*, where the nodes are ordered according to some value derived from the heuristic
+
+  * So how do we determine this value?
 
 ---
 
@@ -377,7 +430,7 @@ What's "the best" node?
 
   * Let's use our heuristic!
   
-  * We consider the node with the lowest heuristic to be "the best"
+  * We order the nodes in the priority queue by heuristic value
   
   * Heuristic: straight line distance to Bucharest
   
@@ -745,9 +798,23 @@ class: small
   
      - Admissible: Never overestimate the cost 
      - Consistent: For a node x and its neighbor y, the heuristic value for x has to be less than or equal to that of y plus the cost of getting from x to y
-     - Every consistent heuristic is also admissible
      
-  * You can also reduce the memory requirements of A* by using Iterative Deepening
+  * You can also reduce the memory requirements of A* by using Iterative Deepening:
+  
+     - Limit search to a particular depth 
+     - If no path is found, increase the limit
+  
+---
+
+# Dijkstra's algorithm
+
+  * You may have heard of Dijkstra's algorithm (and its variants) before
+  
+  * Dijkstra's algorithm is basically A* without using the heuristic 
+  
+  * In some popular formulations you also let the algorithm compute a path for *every* possible destination 
+  
+  * This will give you a shortest path tree, which may be useful if you have to repeatedly find a path to different destinations
   
 ---
 
@@ -762,6 +829,50 @@ class: small
   * An AI could play the game using A*
   
 <img src="/CI-2700/assets/img/marioas.png" width="50%"/>
+
+---
+
+# Applications
+
+  - A* is widely applied in games
+  
+  - Unity's built-in navigation module uses A*
+  
+  - But how do you apply A* to a 3D world?
+  
+  - We need a graph!
+  
+  - Idea: Divide the game world into regions, and assign each region a graph node
+  
+---
+
+# Example: World of Warcraft
+
+<img src="/CI-2700/assets/img/wowhalaaview.png" width="80%"/>
+
+---
+
+# Example: World of Warcraft
+
+<img src="/CI-2700/assets/img/wowhalaa.jpg" width="80%"/>
+
+---
+
+# Example: World of Warcraft
+
+<img src="/CI-2700/assets/img/wowhalaa2.jpg" width="80%"/>
+
+---
+
+# Example: World of Warcraft
+
+<img src="/CI-2700/assets/img/wowhalaa3.jpg" width="80%"/>
+
+---
+
+# Example: World of Warcraft
+
+<img src="/CI-2700/assets/img/wowhalaa4.jpg" width="80%"/>
 
 ---
 
@@ -829,6 +940,65 @@ class: small
 
 class: small
 
+# Utility: Pathfinding
+
+  * A utility-based approach can also be used for pathfinding
+  
+  * Assign a utility value to each space in the game
+  
+  * The goal has (very) high utility 
+  
+  * Obstacles have negative utility 
+  
+  * Each of these utility values is actually a field of values 
+  
+  * The total utility of the space is the sum of these fields
+  
+---
+
+# Potential Fields
+
+<img src="/PF-3341/assets/img/pffig2c.png" width="80%"/>
+
+---
+
+# Potential Fields
+
+<img src="/PF-3341/assets/img/pffig3.png" width="80%"/>
+
+---
+
+# Potential Fields
+
+<img src="/PF-3341/assets/img/pffig12a.png" width="80%"/>
+
+---
+
+# Flow Fields
+
+<img src="/PF-3341/assets/img/flowfield.png" width="80%"/>
+
+---
+
+class: small
+
+# Potential Fields
+
+  * Potential (and Flow) Fields can be a very efficient way to find paths in large and complex environments 
+  
+  * Local optima are a big problem. Potential solutions:
+      - Save the trail of the unit to avoid revisiting the same location 
+      - Make obstacles convex (virtually)
+      - Use a forward simulation and use some other pathfinding algorithm to find a way out of local optima
+      
+  * It is easy to combine them with strategic decision making: add more utility to higher-priority targets, add more negative utility to dangerous areas, etc.
+  
+  * Scaling and tweaking can still be challenging
+  
+---
+
+class: small
+
 # Utility: Task Assignment
 
   * Say we have StarCraft, a real-time strategy game 
@@ -866,6 +1036,51 @@ class: small
   * And y'all sent me the utility values ...
   
   * Papers were assigned to maximize total utility
+  
+---
+
+# Paper Task Assignment 
+
+```Haskell
+u 1 1 =  1.0
+u 1 3 =  0.66
+u 1 6 =  0.33
+u 1 _ = -1.0
+
+utility :: [(Int,Int)] -> Double
+utility assignments = sum $ map (uncurry u) assignments
+
+makeAssignment :: [Int] -> [Int] -> [(Int,Int)]
+makeAssignment students topics =
+        maximumBy (comparing utility) assignments
+     where 
+        assignments = map (zip students) $ permutations topics
+```
+
+([Source](/PF-3341/assets/img/assign.hs))
+
+See any problem? 
+--
+Here's a bad word for you: **permutations**
+
+---
+
+class: small
+
+# Another Task Assignment Example
+
+  * 13 topics means 13! possible assignments 
+  
+  * 13! = 6 227 020 800
+  
+  * Even an optimized build of the assignment program takes a while to run
+  
+  * Several solutions:
+      - We know/can guess that several assignments are not going to be good 
+      - We may be able to reduce the problem in other ways (some papers were only picked by one student as their first choice)
+      - Randomly pick a few options and choose the best of those (may be "good enough" for many games)
+      - Pick an assignment and incrementally improve it 
+      - Use some optimization technique
 
 ---
 
@@ -877,11 +1092,11 @@ class: center, middle
 
 # Adversaries? 
 
-  * Planning doesn't really help if another character, or the player, can interfere?
+  * So far we have only looked at making decisions based on our own plans
   
-  * How do we account for this?
+  * What if the other player can make several different decisions in response to our action?
   
-  * For example, how can we play chess, if the opponent makes moves that affect our plans?
+  * For example, how can we play chess, accounting for what the opponent will do?
   
   * Adversarial search!
   
@@ -889,7 +1104,7 @@ class: center, middle
 
 class: small
 
-# Minimax!
+# Minimax
 
   * Let's say we want to get the highest possible score 
   
@@ -2060,7 +2275,8 @@ class: small
 
 # Minimax 
 
-Let's draw the tree for Tic Tac Toe
+Let's take a game where we "build" a binary number by choosing bits. The number starts with a 1, and each player can choose the next bit in order. The game ends 
+when the number has 6 digits in total (after 5 choices), or if the same bit was chosen twice in a row. If the resulting number is even or prime, we get points equal to the number, otherwise the other player gets that many points. We want to know: What is our best first move assuming the other player plays optimally.
 
 ---
 
@@ -3013,7 +3229,7 @@ class: small
 
 # Minimax: Limitations
 
-  * A tree for Tic Tac Toe is large to draw
+  * The tree for our mini game was quite large
   
   * Imagine one for chess 
   
@@ -3022,8 +3238,149 @@ class: small
   * Use a guess! For example: Board value after 3 turns 
   
   * What about unknown information (like a deck that is shuffled)?
- 
+  
+---
 
+class: center, middle 
+
+# Presenting and Discussing Research Papers 
+
+---
+
+class: small
+
+# The Structure of a Paper
+
+  * Introduction: What is the problem and why is it relevant?
+  
+  * Related Work: What have other people done that is related to the work discussed, and why do their approaches not solve the problem at hand?
+  
+  * Approach/Methodology: How do the authors solve the problem?
+  
+  * Result: How can we be sure that the proposed approach actually solves the problem?
+  
+  * Conclusion: What are the limitations of the proposed work, and how could it be expanded upon in the future?
+  
+---
+
+class: small
+
+# Reading a Paper 
+
+  * When reading a paper, determine the answers to the questions that should be answered in each section 
+  
+  * While the technical details can be interesting, your main focus should be on understanding the problem and the idea behind the solution 
+  
+  * Also challenge any assumptions the authors may have made to determine if they have actually solved the problem 
+  
+  * However, also note the good ideas in the paper
+  
+  * Never just assume that a problem is "not important"
+  
+---
+
+class: small
+
+# The Context of a Paper 
+
+  * When was the paper written? What were the available computational resources at the time?
+  
+  * Who wrote the paper? What is their expertise?
+  
+  * Where was the paper published?
+  
+      - Workshop: Typically experimental work, work in progress, or work without strong results 
+      - Academic Conference: In (most of) Computer Science conferences are the norm for strong, peer-reviewed publications. But not all conferences are created equal: Know your conferences!
+      - Industry Conference: Typically shows more applied work with less focus on scientific rigor and provable results
+      - Journals: Typically reserved for more detailed work, or extensions of conference papers 
+      - Magazines: Usually not peer-reviewed, but articles are selected by an editor
+  
+---
+
+class: small
+
+# Some Academic Conferences
+
+  * Strong General AI-focused conferences:
+      * [Association for the Advancement of AI conference (AAAI)](https://aaai.org/Conferences/AAAI/aaai.php)
+      * [ International Joint Conference on Artificial Intelligence (IJCAI)](https://www.ijcai.org/)
+
+  * Strong Game AI-focused conferences:
+      * [Artificial Intelligence in Interactive Digital Entertainment (AIIDE)](http://aiide.org)
+      * [Computational Intelligence in Games (CIG)](http://www.ieee-cig.org/)
+      
+  * Strong Games-focused conferences:
+      * [Conference on Games (CoG)](http://www.ieee-cog.org/)
+      * [Foundations of Digital Games (FDG)](http://www.foundationsofdigitalgames.org/)
+      * [Computer-Human Interaction Play (CHI-Play)](https://chiplay.acm.org)
+      * [Digital Games Research Association Conference (DiGRA)](http://www.digra.org/)
+      
+---
+
+class: small
+
+# Other Publication Venues
+      
+  * Some popular academic workshops for game AI research:
+      * [Experimental AI in Games (EXAG)](http://exag.org)
+      * [Procedural Content Generation Workshop (PCG)](https://www.pcgworkshop.com/)  
+      * [Intelligent Narrative Technologies (INT)](https://sites.google.com/ncsu.edu/intwiced18/home)
+ 
+  * Industry-focused publication venues 
+      * [Game Developers Conference (GDC)](https://www.gdconf.com/) (Happening **right now**)
+      * Related: [GDC Vault](https://www.gdcvault.com/)
+      * [Gamasutra (website)](http://www.gamasutra.com/)
+      * [Game AI Pro (book series)](http://www.gameaipro.com/)
+      
+  * Universities
+      * [Institutions active in Technical Games Research](http://www.kmjn.org/game-rankings/)
+      
+---
+
+class: small
+
+# Presenting the Papers
+
+  * First step: Read and understand the paper 
+  
+  * Make sure your presentation includes the important parts:
+      - Which problem is being solved?
+      - How do the authors solve it
+      - What evidence do they provide (experiment results)?
+      - What's next?
+      
+  * Don't get bogged down in too much detail 
+  
+  * Avoid formulas on slides, unless they are central to the paper
+  
+  * After your presentation you should also *lead* the discussion
+  
+---
+
+# Paper Discussions 
+
+   * What did we like about the paper?
+   
+   * Which application can we see for the technique?
+   
+   * Are there any assumptions the authors made that may need a second look?
+   
+   * Are there any problems with the experiment?
+   
+   * What are the limitations of the approach?
+
+   * How can the work be expanded upon?
+   
+---
+
+# For Next Week
+
+   * Read [Human Enemy AI in The Last of US](http://www.gameaipro.com/GameAIPro2/GameAIPro2_Chapter34_Human_Enemy_AI_in_The_Last_of_Us.pdf)
+   
+   * There is also a [GDC talk](https://www.gdcvault.com/play/1020338/The-Last-of-Us-Human)
+   
+   * We will discuss this paper next week!
+ 
 ---
 
 class: small
@@ -3034,11 +3391,17 @@ class: small
   
   * [Halo 2 AI using Behavior Trees](http://www.gamasutra.com/view/feature/130663/gdc_2005_proceeding_handling_.php)
   
+  * [A* implementations in multiple languages](https://rosettacode.org/wiki/A*_search_algorithm)
+  
   * [Sliding puzzle using A*](https://blog.goodaudience.com/solving-8-puzzle-using-a-algorithm-7b509c331288)
+  
+  * [Potential Fields for RTS Games](http://bth.diva-portal.org/smash/get/diva2:835046/FULLTEXT01.pdf)
   
   * [Building a Chess AI with Minimax](https://medium.freecodecamp.org/simple-chess-ai-step-by-step-1d55a9266977)
   
-  * [Potential Fields for RTS Games](http://bth.diva-portal.org/smash/get/diva2:835046/FULLTEXT01.pdf)
+  * [The Art of Dissecting Journal Articles](https://phdlife.warwick.ac.uk/2015/03/09/the-art-of-dissecting-journal-articles/)
+  
+  * [How to Read a Paper](https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf)
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
