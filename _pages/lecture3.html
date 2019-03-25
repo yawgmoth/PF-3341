@@ -1,11 +1,7 @@
----
-permalink: /slides/lecture3.html
----
-
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lecture 3: Game Design</title>
+    <title>Lecture 3: Planning</title>
     <meta charset="utf-8">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -29,6 +25,22 @@ permalink: /slides/lecture3.html
       .medium li {  font-size: 1.1em; }
       
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      
+      .left-column {
+        color: #777;
+        width: 25%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 70%;
+        float: right;
+        padding-top: 1em;
+        font-size: 1em;
+      }
     </style>
   </head>
   <body>
@@ -36,379 +48,441 @@ permalink: /slides/lecture3.html
 
 class: center, middle
 
-# Creación de Videojuegos
+# AI in Digital Entertainment
 
-### Game Design
+### Planning
 
 ---
 
 class: center, middle
 
-# Games as Systems
+# The Planning Problem
 
 ---
 
-# What is a System?
+# Intelligent Agents 
 
-A system is
-
-  * a group of
+  * We said intelligent agents can solve problems without requiring exact instructions how to
   
-  * interacting, 
+  * This allows them to solve problems in "arbitrary" situations
   
-  * interrelated, and
-
-  * interdependent
+  * So how do we solve problems?
   
-  * components
+  * Let's formalize "solving problems" as: The agent has to figure out by itself how to achieve a goal it is given 
   
 ---
 
-# What is a System?
+# The Planning Problem 
 
-A system is
+A planning problem consists of three parts:
 
-  * a group of
+  * A definition of the current state of the world 
   
-  * interacting, 
+  * A definition of a desired state of the world 
   
-  * interrelated, and
-
-  * interdependent
+  * A definition of the actions the agent can take 
   
-  * <b>components</b>
-  
----
-
-# Components?
-
-## What do we have in a game?
-
- * Objects 
- 
- * Attributes 
- 
- * Relationships 
- 
- * Environment
-  
----
-
-class: middle, center
-
-# Components?
-
-## What do we have in a game?
- 
-Super Mario
-
----
-
-class: small
-
-# Components 
-
-  * Objects
-    - Player
-    - Enemies (Goomba, Koopa Troopa)
-    - Items (Mushroom, coin, flower)
-    - Level geometry
-    - Score, lives
-    - Buttons (input)
-  * Attributes 
-    - Where is Mario? Is he in the air (jumping)?
-    - Is Mario small/large?
-    - Which way is the Goomba facing?
-    - Is the Koopa Troopa in its shell?
-  * Relationships
-    - Pressing buttons makes Mario move/jump/shoot
-    - Mushroom makes Mario grow
-    - Jumping on Goomba destroys it
-    - Running into Goomba makes the player lose a life and start over
-    - Coins give points
-  * Environment
-    - NES: Controller, memory, TV screen
-    - Single player, local multiplayer
-    
----
-
-class: small
-
-# Framing
-
-  * Formal
-    - View the game as a set of rules
-    - Closed off from the outside environment
-    - Super Mario gameplay
-    
-  * Experiental
-    - View the game as an experience for the players
-    - Not about the mechanics, but about the effect they have on the player 
-    - Super Mario as a test of skill/reaction time
-    
-  * Cultural
-    - View the game as a cultural artifact
-    - Impact of the game on society/culture
-    - Super Mario as a pioneer in video games 
-    - Impact of gender dynamics: Mario rescuing the princess
-
----
-
-# Rules: Game Mechanics
-
-The game mechanics describe the interactions between the objects in detail 
-
-  * Controls 
-  
-  * Friendly behavior
-  
-  * Enemy behavior
-  
-  * Level behavior 
-  
-  * Win/loss conditions, scoring
-  
----
-
-# Controls
-
-Controls are easy:
-
-  * Left/right make Mario move left/right 
-
-  * Button A makes Mario jump 
-
-  * Button B makes Mario shoot a fireball
+All of these definitions are done in "some" formal language.
 
 --
 
-But Mario can not always shoot fireballs?
+Logic is a good choice for a formal language!
 
 ---
 
-class: small
+# An Example Planning Problem: Blocks World 
 
-# Interaction
-
-Let's add an interaction rule:
-
-  * If Mario collides with a fire flower power-up ... 
+  * We have three blocks, A, B, and C
   
---
-
-Actually, we need something to interact with:
-
-  * Attribute: Mario can have the "shoot" ability (bool)
+  * Blocks A and B are on the table, block C is on top of block B
   
-  * If Mario collides with a fire flower power-up he gets the shoot ability 
+  * Blocks can be stacked 
   
-  * If Mario collides with an enemy, and he has the shoot ability, he loses it
-
----
-
-# Controls
-
-Controls are (now) easy:
-
-  * Left/right make Mario move left/right 
-
-  * Button A makes Mario jump 
-
-  * Button B makes Mario shoot a fireball <b>if Mario has the shoot ability</b>
+  * At the moment, all blocks are on the table next to each other 
+  
+  * We want the blocks to be stacked, with C on top of B, and B on top of A
   
 ---
 
-# Enemy Behavior: AI! (sort of)
+# An Example Planning Problem: Blocks World 
 
-What does a Goomba do?
-
-  * Face left initially (attribute)
-  
-  * Walk
-  
-  * If a wall is hit (interaction with the level!), flip 180 degrees
-  
-  * Keep walking
-  
---
-
-I would not call this "AI", but what is important is that it <b>plays well</b>
-
----
-
-# Summary 
-
-  * Games consist of objects, attributes and interactions, and are situtated in an environment 
-  
-  * The mechanics define the rules by which objects interact and change their attributes 
-  
-  * Game design consists of defining these interactions
-  
-  * Important: Player experience (we will talk about this in a future class)
+<img src="problemstatement.png" width="100%"/>
   
 ---
 
-class: middle, center
+# Formalizing the Problem 
 
-# How could we modify Super Mario?
+Current state:
+$$
+\text{on}(A, \mathit{table}) \wedge\\\\
+\text{on}(B, \mathit{table}) \wedge \\\\
+\text{on}(C, B)\\\\
+$$
+
+Goal:
+$$
+\text{on}(A, \mathit{table}) \wedge \\\\
+\text{on}(B, A) \wedge\\\\
+\text{on}(C, B)\\\\
+$$
+  
+---
+
+# Actions?
+
+What can the agent do?
+
+  * Let's say our agent is a simple robot
+  
+  * It has a gripper
+  
+  * It can pick up a block, and also put it down (on the table, or on top of another block)
+  
+---
+
+# Formalizing Actions?
+
+  * First, we need to represent that the robot is holding some block X somehow: `\(\text{holds}(X)\)`
+  
+  * Picking up a block then has a **precondition** and an **effect**
+  
+  * The precondition defines *when* an action can even be taken 
+  
+  * The effect defines what the action *changes* in the world 
+  
+---
+
+# Picking Up a Block X 
+
+Precondition:
+$$
+\forall Y \in \mathit{blocks}: \neg \text{holds}(Y) \wedge \\\\
+\forall Y \in \mathit{blocks}: \neg \text{on}(Y, X) 
+$$
+
+Effect:
+$$
+\forall Y \in \mathit{blocks}: \neg \text{on}(X, Y) \wedge \\\\
+\neg \text{on}(X, \mathit{table}) \wedge \\\\
+\text{holds}(X) 
+$$
 
 ---
 
-class: middle, center
+# Putting a Block X on Top of a Block Y
 
-# How could we modify Super Mario?
+Precondition:
+$$
+\text{holds}(X) \wedge \\\\
+\forall Z \in \mathit{blocks}: \neg \text{on}(Z, Y) 
+$$
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SaoHMjS04vU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<a href="http://stabyourself.net/mari0/">stabyourself.net/mari0</a>
-
----
-
-class: center, middle
-
-# Goals
-
-## What do we want the player to do?
+Effect:
+$$
+\text{on}(X, Y) \wedge \\\\
+\neg \text{holds}(X)
+$$ 
 
 ---
 
 class: medium
 
-# Goals
+# Complexity?
 
-  * Reach the end of the level/section/story chapter
+  * Logic is nice, but this seems like a pretty complex problem to solve?
   
-  * Win a particular game/combat 
-    - Can be combined with a "metagame"
-    - Many PvP online games do this 
-    
-  * Quests/incremental advantages/scoring
+  * Whenever we want to execute an action we have to check against all blocks to see if the agent is already holding something, or if there's already something on 
+  the target block 
   
-  * Don't give the player any particular goal at all (sandbox)
+  * We can use an encoding trick to simplify the problem: Have predicates for negative conditions, too
   
-  * Combinations
+  * For example: There is a predicate `holds` and a predicate `free` for the gripper, and a predicate `on` and a predicate `clear` for the blocks
   
 ---
 
-# Levels, sections, chapters
+# Picking Up a Block X 
 
-  * Linear progression 
-  
-  * Easy to define 
-  
-  * Can control player experience more finely
-  
-  * Players are now asking for more autonomy
-  
-  * Level-based design can still work well!
-  
+Precondition:
+$$
+\text{free}() \wedge \\\\
+\text{clear}(X)
+$$
+
+Effect:
+$$
+\neg \text{clear}(X) \wedge \\\\
+\neg \text{free}() \wedge 
+\text{holds}(X)
+$$
+
 ---
 
-# Game/combat wins
+# Putting a Block X on Top of a Block Y
 
-  * Typically for competitive games
-  
-  * Each game is self-contained 
-  
-  * Outside progression adds a meta-game 
-  
-  * Often tied to monetization strategy
-    - Win games to unlock characters/weapons/cosmetic items
-    - Or buy them
-    
-  * Can also be used as a teaching tool
-  
+Precondition:
+$$
+\text{holds}(X) \wedge \\\\
+\text{clear}(Y)
+$$
+
+Effect:
+$$
+\text{on}(X, Y) \wedge \\\\
+\neg \text{clear}(Y) \wedge \\\\
+\neg \text{holds}(X) \\\\
+\text{clear}(X)
+$$
+
 ---
 
-# Quests/incremental advantages/scoring
+# STRIPS
 
-  * Kill monsters until it gets hard
-  
-  * Get a better weapon 
-  
-  * Killing monsters is easier again 
-  
-  * Repeat 
-  
-  * Taken to the extreme: Idle games
-  
----
 
-# Sandbox
+.left-column[ 
+  <img src="Shakey.png" width="100%"/>
+]
 
-  * Create a world with many options 
-  
-  * Let the players choose what to do
-  
-  * Typically there is some conflict present
-  
----
+.right-column[
 
-# Combinations
+* Shakey the Robot could solve problems given by a goal state
 
-  * Scoring and levels: Improve on simple binary win/lose 
-  
-  * Quests and sandbox: Guide player 
-  
-  * Incremental advantage and levels: Make future levels easier 
-  
-  * Meta-game in combat-based games often provides incremental advantages or points
+* Various sensors let it build a model of the current world state
+
+* The Stanford Research Institute Problem Solver was the planner responsible for finding a solution
  
- 
+]
+
 ---
 
-# Achievements
+class: small
+
+# STRIPS planning 
+
+  * A state (and the goal!) is defined as a set of atomic propositions of what is true in the world
   
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hFM4eIAou5M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  * The goal is reached when it is a **subset** of a state
+  
+  * Each action consists of four sets of atomic propositions: 
+      * Two sets of preconditions: positive and negative
+      * An add list: What the action makes true
+      * A delete list: What the action makes false 
+      
+  * To check if an action can be executed in a state, the planner checks if all positive preconditions are in the state and all negative ones are not
+  
+  * To execute the action, a new state is produced as the union of the old state with the add list, and then the delete list is removed
+  
+---
+
+# Picking Up a Block X in STRIPS
+
+Positive Preconditions:
+$$
+\text{free}(), \text{clear}(X)
+$$
+Negative Preconditions: None
+
+Add List:
+$$
+\text{holds}(X)
+$$
+
+Delete List:
+$$
+\text{free}(), \text{clear}(X)
+$$
+
+---
+
+class: medium
+
+# Actions vs. Action Schemata
+
+  * Technically "Picking up a block X" (`pickup(X)`) is not an action, because there is no "Block X" in our domain 
+  
+  * We used "X" as a free variable to refer to "any block"
+  
+  * An actual (classical) STRIPS planning problem needs ground actions, without any free variables 
+  
+  * `pickup(X)` is an **action schema** that will need to be turned into ground actions (without free variables) `pickup(A)`, `pickup(B)`, and `pickup(C)`
+  
+  * We also had "Put block X on top of block Y" (`put(X,Y)`), which would resolve into `put(A,A)`, `put(A,B)`, etc.
+  
+---
+
+# The Actual Planning Process
+
+  * Forward-Chaining: The planner starts with the start state, and applies actions to get a new state until it reaches a state that satisfies the goal. It may do so 
+  by dividing the goal into subgoals that have to be reached.
+  
+  * Backward-Chaining: The planner examines the goal and determines which actions have an effect that contributes to that goal and which preconditions these actions 
+  have, until it reaches the start state
+
+---
+
+# The Sussman Anomaly
+
+Let's look at a slightly different problem:
+
+<img src="sussman.png" width="100%"/>
+
+---
+
+class: small
+
+# The Sussman Anomaly
+
+There are two goals: `on(A,B)` and `on(B,C)`. If the planner divides the goal into subgoals:
+ 
+- If it tries to reach a state with A on top of B first, it will put C aside, then put A on B, and then can not fulfill the other goal without undoing the first (by removing A).
+
+- If it tries to reach a state with B on top of C first, it will just put B on top of the pile, and then can't satisfy the other goal.
+    
+A "proper" solution has to interleave solving these two goals: First remove C, then put B on C, then put A on B. This requirement for interleaving is called "the Sussman Anomaly", discovered in the 1970s. Modern Planners do not run into this problem anymore.
+
+---
+
+class: center, middle 
+
+# Planning as Heuristic Search
+
+---
+
+# Planning as Heuristic Search 
+
+  * Remember: Everything in AI is either representation or search 
+  
+  * We now have a representation for planning problems
+  
+  * Let's search for a solution!
+  
+  * How? A*! What do we need? 
+--
+A graph and a heuristic
+
+---
+
+# State-Space Planning
+
+We define our graph as follows:
+
+   * Each node is a state of the world 
+   
+   * Each edge represents an action 
+   
+   * A node n is connected to a node m with an action if the action is applicable in n, and the result of applying the action is m
+   
+   * Now we can search a path to *a* node that satisfies the goal 
+   
+---
+
+# State-Space Planning
+
+<img src="planspace.png" width="100%"/>
+   
+---
+
+class: medium
+
+# Heuristic Search 
+
+  * There are many different heuristics for planning 
+  
+  * One option: For each atomic proposition in the goal, estimate how "hard" (in terms of actions) it is to achieve that proposition
+  
+  * How expensive is it to achieve a proposition? Depends on how hard it is to achieve the preconditions of the actions that add it (recursive definition).
+  
+  * Another way to think about it: If we ignore what actions delete, how can we get to *adding* the right propositions to the state as quickly as possible.
+
+---
+
+# Planning Complexity 
+
+  * Planning is PSPACE complete 
+  
+  * You probably know the problem of P vs. NP?
+  
+  * PSPACE is (probably) even worse than NP
+  
+$$
+P \subseteq \mathit{NP} \subseteq \mathit{PSPACE} \subseteq \mathit{EXP}
+$$
+
+(Any of these subsets may or may not be proper, but at least one of them is)
+
+---
+
+# Why is Planning Hard?
+
+  * We just said that planning is pathfinding on a graph consisting of the states 
+  
+  * Pathfinding is solvable in polynomial time 
+  
+  * Planning is not? Why?
+
+--
+
+  * For a pathfinding problem, the input is the graph. For a planning problem the input is the initial state, the goal condition and the actions. The graph is 
+  **implicit** (and potentially exponentially large)
+  
+---
+
+# The Good News
+
+  * [All PSPACE-complete planning problems are equal, but some are more equal than others](https://www.aaai.org/ocs/index.php/SOCS/SOCS11/paper/view/4009/4353)
+  
+  * Many interesting planning problems, i.e. the ones that show up in practice, are tractable, even if their generalizations are theoretically hard to solve.
+  
+  * Another way to think about it: Since the solutions we usually *want* are not going to be exponential in length, we shouldn't have to generate a graph of 
+  exponential size.
 
 ---
 
 class: center, middle
 
-# Game Design Document
+# Plan-Space Planning 
 
 ---
 
-# Game Design Document
+# Partial-Order Causal-Link Plans 
 
-A living, changing document containing
-  
-  * Game Pitch
-  
-  * Setting
-  
-  * Rules (interactions)
-  
-  * Goals 
-  
-More details tomorrow!
-  
 ---
 
-# For the <b>project</b>, additionally
+# Least-Commitment Planning
 
-  * A name for the game
-  
-  * Team members and relevant skills
-  
-  * Due on 21/1 before class 
-  
-  * Email to me: <a href="mailto:markus.eger.ucr@gmail.com">markus.eger.ucr@gmail.com</a>
-  
+
 ---
 
-# Resources
+class: center, middle 
 
-  * Salen, Katie, and Zimmerman, Eric. *Rules of play: Game design fundamentals*. MIT press, 2004.
+# PDDL
+
+
+---
+
+# Resources 
+
+  * [Planning as Heuristic Search](https://www.cs.toronto.edu/~sheila/2542/s14/A1/bonetgeffner-heusearch-aij01.pdf)
   
-  * <a href="https://www.youtube.com/watch?v=hFM4eIAou5M">Extra Credits: Achievements</a>
+  * [An Introduction to Least-Commitment Planning](https://homes.cs.washington.edu/~weld/papers/pi.pdf)
+  
+  * [Introduction to STRIPS Planning and Applications in Video-games](https://www.dis.uniroma1.it/~degiacom/didattica/dottorato-stavros-vassos/)
 
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({"highlightStyle": "dark"});
+      
+      // Setup MathJax
+      MathJax.Hub.Config({
+          tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+
+      MathJax.Hub.Configured();
     </script>
   </body>
 </html>
