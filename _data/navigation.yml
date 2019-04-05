@@ -6,8 +6,8 @@ main:
     url: /slides
   - title: "Project"
     url: /project
-  #- title: "Sample Posts"
-  #   url: /year-archive/
+  - title: "Paper Presentations"
+    url: /presentations
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
