@@ -1,3 +1,6 @@
+---
+title: "Paper Presentations"
+layout: single
 sitemap: true
 permalink: /presentations/
 frontpageorder: 4
