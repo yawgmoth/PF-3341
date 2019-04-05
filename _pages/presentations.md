@@ -1,5 +1,5 @@
 sitemap: true
-permalink: /presentations
+permalink: /presentations/
 frontpageorder: 4
 categories: [frontpage]
 ---
