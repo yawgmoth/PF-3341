@@ -76,6 +76,8 @@ Remember: Everything in AI is either representation or search
 
 ---
 
+class: mmedium
+
 # Optimization
 
   * Often in search we want to find something called a "solution"
@@ -98,7 +100,7 @@ $$
 f: \mathbb{R}^n \mapsto \mathbb{R}
 $$
 
-find the `\(\vec{x} \in \mathbb{R}^n \)` for which `\(f(\vec{x})\)` is minimal.
+find the `\(\vec{x} \in \mathbb{R}^n \)` for which `\(f(\vec{x})\)` is minimal (or maximal).
 
 --
 
@@ -122,6 +124,8 @@ $$
   
 ---
 
+class: medium
+
 # Minimization vs. Maximization
 
   * For the rest of this talk, we will assume that we want to minimize our functions 
@@ -130,7 +134,7 @@ $$
   
   * We can turn a maximization problem into a minimization one by simply negating the value (or subtracting it from the theoretical maximum)
   
-  * For example: If the maximum possible score is 100 000, to maximize the score we want to *minimize* the distance to that value
+  * For example: If the maximum possible score is 100000, to maximize the score we want to *minimize* the distance to that value
   
 ---
 
@@ -154,7 +158,7 @@ class: center, middle
 
 # Geometric Interpretation 
 
-<img src="angrybirds.png" width="80%"/>
+<img src="/PF-3341/assets/img/angrybirds.png" width="80%"/>
 
 ---
 
@@ -176,7 +180,7 @@ If you change the input a little bit, the output also only changes a little bit.
 
 Is the function that maps from angle and strength to score differentiable?
 
-<img src="angrybirds.png" width="70%"/>
+<img src="/PF-3341/assets/img/angrybirds.png" width="70%"/>
 
 ---
 
@@ -214,13 +218,13 @@ $$
 
 # Gradient Descent 
 
-<img src="gradientdescent.jpg" width="100%"/>
+<img src="/PF-3341/assets/img/gradientdescent.jpg" width="100%"/>
 
 ---
 
 # Gradient Descent 
 
-<img src="gradientdescentproblems.png" width="100%"/>
+<img src="/PF-3341/assets/img/gradientdescentproblems.png" width="100%"/>
 
 ---
 
@@ -368,7 +372,7 @@ class: medium
 
 # Particle-Swarm Optimization 
 
-<img src="ParticleSwarmArrowsAnimation.gif" width="80%"/>
+<img src="/PF-3341/assets/img/ParticleSwarmArrowsAnimation.gif" width="80%"/>
 
 ---
 
@@ -1016,6 +1020,8 @@ class: center, middle
 
 ---
 
+class: medium
+
 # Function Approximation
 
   * For optimization we need a search space of vectors and a fitness function 
@@ -1026,7 +1032,7 @@ class: center, middle
   
   * Idea: Estimate the fitness values 
   
-  * It is helpful if we have fitness values for *some* inputs, and then we determine the intermediate values 
+  * Iff we have fitness values for *some* inputs, we can calculate a guess for the intermediate values 
   
 ---
 
@@ -1041,6 +1047,8 @@ class: center, middle
   * Our fitness functions are not usually linear, though 
   
 ---
+
+class: medium
 
 # Interpolation 
 
@@ -1114,7 +1122,7 @@ class: center, middle
 
 # Multi-Objective Optimization: Approaches
 
-  * Maybe we can try to optimize the sum of both values? (Maximization vs. Minimazation?)
+  * Maybe we can try to optimize the (weighted) sum of both values?
   
   * Or how about a ratio? Let's optimize the army strength *per* resource spent 
   
@@ -1128,7 +1136,7 @@ class: center, middle
 
   * Say we have two values, x and y, to maximize
   
-  * If we have a solution with fitness (x,y), any other solution for which the fitness for x is lower **and** the fitness for y is lower, is an objectively worse solution. The first solution is said to *dominate* the other
+  * If we have a solution with fitness (x,y), any other solution for which the fitness for x is higher **and** the fitness for y is higher, is an objectively worse solution. The first solution is said to *dominate* the other
   
   * However, solutions for which x is higher *or* y is higher can be considered of the "same" utility
   
@@ -1402,7 +1410,7 @@ class: center, middle
        xml:space="preserve"><tspan
          x="196.59579"
          y="468.01727"
-         id="tspan2169">f2(A) &lt; f2(B)</tspan></text>
+         id="tspan2169">x(A) &lt; x(B)</tspan></text>
     <g
        transform="translate(32.00000,0.000000)"
        id="g2362">
@@ -1414,7 +1422,7 @@ class: center, middle
          xml:space="preserve"><tspan
            x="75.516228"
            y="48.788853"
-           id="tspan2123">f1</tspan></text>
+           id="tspan2123">y</tspan></text>
       <text
          x="563.25354"
          y="473.52396"
@@ -1423,7 +1431,7 @@ class: center, middle
          xml:space="preserve"><tspan
            x="563.25354"
            y="473.52396"
-           id="tspan2127">f2</tspan></text>
+           id="tspan2127">x</tspan></text>
       <path
          d="M 106.61414,443.44009 L 106.61414,7.1035860"
          style="opacity:1.0000000;fill:#fff8cb;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2550713;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000"
@@ -1464,7 +1472,7 @@ class: center, middle
        xml:space="preserve"><tspan
          x="2.4959474"
          y="233.37555"
-         id="tspan3880">f1(A) &gt; f1(B)</tspan></text>
+         id="tspan3880">y(A) &gt; y(B)</tspan></text>
   </g>
 </svg>
 
@@ -1473,16 +1481,7 @@ class: center, middle
 # Next Week 
 
   * [Build order optimization in Starcraft](https://www.aaai.org/ocs/index.php/AIIDE/AIIDE11/paper/viewFile/4078/4407)
-  
----
 
-# Resources 
-
-  * [Chapter 2.3.4 in the Game AI Book](http://gameaibook.org)
-
-  * [A Survey of Monte Carlo Tree Search Methods](http://repository.essex.ac.uk/4117/1/MCTS-Survey.pdf)
-
- 
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
