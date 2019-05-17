@@ -605,6 +605,8 @@ $$
 $$
 </span>
 
+(And analogously for w)
+
 ---
 
 class: medium
@@ -616,7 +618,11 @@ class: medium
   * For each example, we calculate the output (forward propagation)
   
   * Then we use the gradient of the error function to change the weights (back propagation)
-  
+<span style="font-size: 0.7em">  
+$$
+v_n = v + \alpha \cdot \frac{\partial}{\partial v} E(v,w)
+$$
+</span>
   * We can also accumulate multiple training examples at a time (a "batch")
 
 --
@@ -645,25 +651,6 @@ class: medium
   
   * Adding the values of the weights to the error can help mitigating overfitting (regularization)
 
----
-
-class: small
-
-# An AI Koan
-
-In the days when Sussman was a novice, Minsky once came to him as he sat hacking at the PDP-6.
-
-"What are you doing?", asked Minsky.
-"I am training a randomly wired neural net to play Tic-Tac-Toe" Sussman replied.
-"Why is the net wired randomly?", asked Minsky.
-"I do not want it to have any preconceptions of how to play", Sussman said.
-
-Minsky then shut his eyes.
-"Why do you close your eyes?", Sussman asked his teacher.
-"So that the room will be empty."
-
-At that moment, Sussman was enlightened.
-  
 ---
 
 class: medium
@@ -703,6 +690,25 @@ Not addressed:
 # Tensorflow Playground 
 
 [A Neural Network Playground](https://playground.tensorflow.org)
+
+---
+
+class: small
+
+# An AI Koan
+
+In the days when Sussman was a novice, Minsky once came to him as he sat hacking at the PDP-6.
+
+"What are you doing?", asked Minsky.
+"I am training a randomly wired neural net to play Tic-Tac-Toe" Sussman replied.
+"Why is the net wired randomly?", asked Minsky.
+"I do not want it to have any preconceptions of how to play", Sussman said.
+
+Minsky then shut his eyes.
+"Why do you close your eyes?", Sussman asked his teacher.
+"So that the room will be empty."
+
+At that moment, Sussman was enlightened.
 
 ---
 
