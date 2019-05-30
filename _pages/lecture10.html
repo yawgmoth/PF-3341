@@ -25,6 +25,8 @@ permalink: /slides/lecture10.html
       
       .small li {  font-size: 1em; }
       
+      .ssmall li {  font-size: 0.9em; }
+      
       .oneline li { font-size: 1.25em; line-height: 1.25em; }
       .oneline li p { font-size: 1.25em; line-height: 1.25em; }
       .oneline p { font-size: 1.25em; line-height: 1.25em; }
@@ -489,6 +491,41 @@ class: mmedium
   
   * There is even a GVGAI competition, where participants get some games to build and train their agents, then get the competition games a few weeks before the competition to fine-tune, and then play unknown levels of these 
   games at the competition
+  
+---
+
+class: center, middle 
+
+# Inverse Reinforcement Learning 
+
+---
+
+# Inverse Reinforcement Learning 
+
+  * As we have seen, defining a good reward function can be tricky 
+  
+  * But what if we observe an expert playing a game and try to learn what they are working towards 
+  
+  * One approach to this is called Inverse Reinforcement Learning, where we try to learn the reward function from observations of the states and actions 
+  
+---
+
+# Inverse Reinforcement Learning 
+
+<img src="/PF-3341/assets/img/IRL.png" width="100%"/>
+
+---
+
+# Inverse Reinforcement Learning: How?
+
+  * Function approximation of the reward function (using neural networks, radial basis functions, etc.)
+  
+  * Problem: Multiple reward functions can equally well explain the expert's behavior 
+  
+     - Measure entropy of the different solutions and use that to decide 
+     - Use prior and/or posterior probabilities of trajectories for a given reward function
+     
+  * IRL is still a relatively new field of research
 
 ---
 
@@ -496,10 +533,9 @@ class: mmedium
 
   * [Improving Generalization Ability in a Puzzle Game Using Reinforcement Learning](http://www.cig2017.com/wp-content/uploads/2017/08/paper_71.pdf)
   
-  
 ---
 
-class: small
+class: ssmall
 
 # References
   
@@ -518,6 +554,8 @@ class: small
   * [Deep Reinforcement Learning for General Video Game AI](https://arxiv.org/pdf/1806.02448.pdf)
   
   * [GVGAI Gym](http://www.gvgai.net/)
+  
+  * [A Survey of Inverse Reinforcement Learning: Challenges, Methods and Progress](https://arxiv.org/pdf/1806.06877.pdf)
   
 
     </textarea>
